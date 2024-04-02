@@ -1,0 +1,78 @@
+@startuml
+
+class model.Animal{
+    nombre:string
+    edad:int
+}
+class model.Especie{
+    especie:string
+    familia:string
+}
+class model.Recinto{
+    nombre:string
+    ubicacion:string
+    referencia:text
+}
+class model.Cuidador{
+    nombre:string
+    apellido:string
+    edad:int
+}
+class model.Actividad{
+    dia:date
+}
+
+class model.CuidadorAnimal {
+  cuidador_id:int
+  animal_id:int
+}
+
+model.Cuidador "1"--"*" model.CuidadorAnimal
+model.CuidadorAnimal "*"--"1" model.Animal
+
+class model.AnimalEspecie{
+  animal_especie_id:int
+  animal_id:int
+  especie_id:int
+}
+model.Animal "1"--"1" model.AnimalEspecie
+model.AnimalEspecie "*"--"1" model.Especie
+
+class model.CuidadorEspecie{
+  cuidador_id:int
+  especie_id:int
+}
+model.Cuidador "1"--"*" model.CuidadorEspecie
+model.CuidadorEspecie "*"--"1" model.Especie
+
+class model.AnimalEspecieRecinto{
+  animal_especie_id:int
+  recinto_id:int
+}
+
+model.Recinto "1"--"*" model.AnimalEspecieRecinto
+model.AnimalEspecieRecinto "*"--"1" model.AnimalEspecie
+
+class model.Horario{
+  hora_inicio:time
+  hora_end:time
+}
+
+class model.ActividadHorario{
+  actividad_horario_id:int
+  horario_id:int
+  actividad_id
+}
+
+model.Actividad "1"--"1" model.ActividadHorario
+model.ActividadHorario "*"--"1" model.Horario
+
+class model.ActividadHorarioAnimal{
+  actividad_horario_id
+  animal_id:int
+}
+
+model.ActividadHorario "1"--"*" ActividadHorarioAnimal
+model.ActividadHorarioAnimal "1"--"1" Animal
+
+@enduml
